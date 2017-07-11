@@ -1,0 +1,26 @@
+{
+  "name": "website-nodejs",
+  "homepage": "https://github.com/mountain410/website-nodejs",
+  "authors": [
+    "mountain"
+  ],
+  "description": "movie website",
+  "main": "",
+  "keywords": [
+    "nodejs",
+    "website"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

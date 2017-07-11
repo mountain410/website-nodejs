@@ -1,0 +1,33 @@
+{
+  "name": "website-nodejs",
+  "version": "1.0.0",
+  "description": "website movie ",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "jade": "^1.11.0",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.1",
+    "underscore": "^1.8.3",
+    "body-parser": "^1.17.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mountain410/website-nodejs.git"
+  },
+  "keywords": [
+    "website",
+    "nodejs",
+    "movie"
+  ],
+  "author": "mountain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mountain410/website-nodejs/issues"
+  },
+  "homepage": "https://github.com/mountain410/website-nodejs#readme"
+}
