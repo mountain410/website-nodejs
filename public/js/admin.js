@@ -1,6 +1,6 @@
 $(function(){
     $(".del").click(function(e){
-        alert("hahah");
+        alert("删啦啦啦啦");
         var target = $(e.target);
         var id = target.data('id');
         var tr = $('.item-id-'+id);

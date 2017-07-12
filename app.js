@@ -13,8 +13,8 @@ var port = process.env.PORT || 3000;
 mongoose.connect('mongodb://localhost/website-nodejs') //连接本地数据库
 app.locals.moment = require('moment');
 
-app.set('/', 'views/pages')
-app.set('view engine', 'jade');
+app.set('views', './views/pages')
+app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 app.listen(port);
@@ -66,7 +66,7 @@ app.get('/admin/update/:id',function(req,res){
     if(id){
         Movie.findById(id,function(err,movie){
             res.render('admin',{
-                title: "imooc 后台更新页",
+                title: "imooc 后台修改页",
                 movie: movie
             })
         })
@@ -77,8 +77,10 @@ app.get('/admin/update/:id',function(req,res){
 app.post('/admin/movie/new',function(req,res){
     var id = req.body.movie._id;
     var movieObj = req.body.movie;
-    var _movie;
-    if(id!=='undefined'){
+    var _movie = null;
+    if(id !=='undefined' && id !== ''){
+        console.log('有电影数据');
+
         Movie.findById(id,function(err,movie){
             if(err){
                 console.error(err);
@@ -93,6 +95,7 @@ app.post('/admin/movie/new',function(req,res){
         })
 
     }else{
+         console.log('无电影数据');
         _movie = new Movie({
             doctor:movieObj.doctor,
             title :movieObj.title,
