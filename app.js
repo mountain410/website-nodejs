@@ -7,17 +7,17 @@ var _ = require('underscore');
 var Movie = require('./models/movie');
 var bodyParser = require('body-parser');
 
-var app = express();
-var port = process.env.PORT || 3000;
+var app = express(); //将实例赋给变量app
+var port = process.env.PORT || 3000; //设置端口号 process是全局变量
 
 mongoose.connect('mongodb://localhost/website-nodejs') //连接本地数据库
 app.locals.moment = require('moment');
 
-app.set('/', 'views/pages')
-app.set('view engine', 'jade');
+app.set('/', 'views/pages');  //设置视图的根目录
+app.set('view engine', 'jade');  //设置默认的模版引擎
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
-app.listen(port);
+app.listen(port); //监听端口
 
 // index page 
 app.get('/', function (req,res) {
@@ -25,6 +25,7 @@ app.get('/', function (req,res) {
     if(err){
         console.error(err);
     }
+    // 当匹配到路由为根目录'/'时，返回渲染首页'index'，并向其传变量
     res.render('index',{
         title:'imooc 首页',
         movies:movies
@@ -34,6 +35,7 @@ app.get('/', function (req,res) {
 
 // admin page
 app.get('/admin/movie',function(req,res){
+  // 当匹配到路由为根目录'/admin/movie'时，返回渲染录入页'admin'，并向其传变量
   res.render('admin',{
     title:'imooc 后台录入页',
     movie:{
