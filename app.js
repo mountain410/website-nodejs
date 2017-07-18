@@ -13,8 +13,9 @@ var port = process.env.PORT || 3000; //设置端口号 process是全局变量
 mongoose.connect('mongodb://localhost/website-nodejs') //连接本地数据库
 app.locals.moment = require('moment');
 
-app.set('/', 'views/pages');  //设置视图的根目录
-app.set('view engine', 'jade');  //设置默认的模版引擎
+
+app.set('views', './views/pages');//设置视图的根目录
+app.set('view engine', 'pug');  //设置默认的模版引擎
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 app.listen(port); //监听端口
@@ -68,7 +69,7 @@ app.get('/admin/update/:id',function(req,res){
     if(id){
         Movie.findById(id,function(err,movie){
             res.render('admin',{
-                title: "imooc 后台更新页",
+                title: "imooc 后台修改页",
                 movie: movie
             })
         })
@@ -79,8 +80,10 @@ app.get('/admin/update/:id',function(req,res){
 app.post('/admin/movie/new',function(req,res){
     var id = req.body.movie._id;
     var movieObj = req.body.movie;
-    var _movie;
-    if(id!=='undefined'){
+    var _movie = null;
+    if(id !=='undefined' && id !== ''){
+        console.log('有电影数据');
+
         Movie.findById(id,function(err,movie){
             if(err){
                 console.error(err);
@@ -95,6 +98,7 @@ app.post('/admin/movie/new',function(req,res){
         })
 
     }else{
+         console.log('无电影数据');
         _movie = new Movie({
             doctor:movieObj.doctor,
             title :movieObj.title,
