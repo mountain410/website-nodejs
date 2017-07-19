@@ -3,3 +3,8 @@ node_modules/
 bower_components/
 libs/
 .gitignore
+**/.*
+bower_components/
+public/libs/
+test
+tests
