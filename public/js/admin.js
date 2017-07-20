@@ -7,7 +7,7 @@ $(function(){
 
         $.ajax({
             type:'DELETE',
-            url:'/admin/list?id=' + id
+            url:'/admin/list?id=' + id   //问号后面加id 传参
         })
         .done(function(results){
             if(results.success ===1){
