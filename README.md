@@ -4,5 +4,5 @@
 ## 需要安装全局bower:
 	npm install bower -g
 
-## 再用bower安装bootstrap和jquery：
-	bower install bootstrap jquery
+## 再用bower安装依赖：
+	bower install 
