@@ -5,14 +5,14 @@ module.exports = function(grunt){
       jade: {
         files: ['views/**'],
         options: {
-          livereload: true
+          livereload: true //重启服务
         }
       },
       js: {
         files: ['public/js/**', 'models/**/*.js', 'schemas/**/*.js'],
         //tasks: ['jshint'],
         options: {
-          livereload: true
+          livereload: true //重启服务
         }
       },
     },
@@ -45,10 +45,10 @@ module.exports = function(grunt){
 	})
 
 	// 加载插件
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-nodemon');
-	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-contrib-watch');//监听文件变化，并重新执行注册任务
+	grunt.loadNpmTasks('grunt-nodemon');//实时监听app.js 
+	grunt.loadNpmTasks('grunt-concurrent');//针对慢任务（less sass coffee等）优化和跑多个阻塞任务
 
-	grunt.option('force',true);//为了防止因为语法错误而中断服务
+	grunt.option('force',true);//为了防止因为语法错误或警告而中断服务
 	grunt.registerTask('default',['concurrent']);//注册一个初始任务
 }

@@ -1,13 +1,13 @@
 //mongoose 编译模式 定义数据字段的类型
 var mongoose = require('mongoose');
 
-var bcrypt = require('bcrypt')
-var SALT_WORK_FACTOR = 10
+var bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
 
 // 定义数据字段的类型
 var UserSchema  = new mongoose.Schema({
   name:{
-    unique:true,
+    unique:true, //唯一性
     type:String
   },
   password: String,
