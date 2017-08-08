@@ -5,8 +5,9 @@ var path = require('path');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var Movie = require('./models/movie');
-var bodyParser = require('body-parser'); //中间件用来解析http请求体
-
+var User = require('./models/user'); 
+//中间件用来解析http请求体,将body中的数据初始化成一个对象，如下文，可以直接用req.body 取出数据
+var bodyParser = require('body-parser'); 
 var app = express(); //将实例赋给变量app。express()表示创建express应用程序
 var port = process.env.PORT || 3000; //设置端口号 process是全局变量
 
@@ -33,6 +34,47 @@ app.get('/', function (req,res) {
       movies:movies
     })
 	})
+})
+
+// signup
+app.post('/user/signup', function(req,res) {
+  var _user = req.body.user;//这是取得name=user[pwd]
+  /* 获取参数数据几种方式：
+   * req.params.userid 这是取得url中/:userid
+   * req.query.userid 这是取得url中问号后面的 /user?userid=1 
+   * req.param('userid') 已被弃用
+   */
+  User.findOne({name: _user.name}, function(err,user){
+    if (err) {
+      console.log(err);
+    }
+    if(user) {
+      return res.redirect('/');
+      // console.log('用户名已存在！')
+    }else {
+      var user = new User(_user);
+      user.save(function (err,user) {
+        if(err) {
+          console.log(err);
+        }
+        res.redirect('/admin/userlist');
+      })
+    }
+  })
+  
+})
+
+//userlist page
+app.get('/admin/userlist',function(req,res){
+  User.fetch(function(err,users){
+    if(err){
+      console.error(err);
+    }
+    res.render('userlist',{
+      title:'用户列表页',
+      users:users
+    })
+  })
 })
 
 // admin page

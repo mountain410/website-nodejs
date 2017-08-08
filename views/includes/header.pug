@@ -20,10 +20,10 @@
 				.modal-body.clearfix
 					.form-group.clearfix
 						label(for="signupName") 用户名
-						input#signupName.form-control(name="name" type="text" placeholder="账号")
+						input#signupName.form-control(name="user[name]" type="text" placeholder="账号")
 					.form-group.clearfix
 						label(for="signupPassword") 密码
-						input#signupPassword.form-control(name="password" type="password" placeholder="密码")
+						input#signupPassword.form-control(name="user[password]" type="password" placeholder="密码")
 				.modal-footer
 						button.btn.btn-default(type="button" data-dismiss="modal") 关闭
 						button.btn.btn-success(type="submit") 注册
@@ -35,10 +35,10 @@
 				.modal-body.clearfix
 					.form-group.clearfix
 						label(for="signinName") 用户名
-						input#signinName.form-control(name="name" type="text" placeholder="账号")
+						input#signinName.form-control(name="user[name]" type="text" placeholder="账号")
 					.form-group.clearfix
 						label(for="signinPassword") 密码
-						input#signinPassword.form-control(name="password" type="password" placeholder="密码")
+						input#signinPassword.form-control(name="user[password]" type="password" placeholder="密码")
 				.modal-footer
 						button.btn.btn-default(type="button" data-dismiss="modal") 关闭
 						button.btn.btn-success(type="submit") 登录

@@ -1,7 +1,6 @@
 //mongoose 编译模式 定义数据字段的类型
 var mongoose = require('mongoose');
-
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var SALT_WORK_FACTOR = 10;
 
 // 定义数据字段的类型
@@ -38,14 +37,19 @@ var UserSchema  = new mongoose.Schema({
 // 每次存储数据之前都会经过此方法
 UserSchema.pre('save',function(next){
   // 判断数据是更新还是新增
+  var user = this;
   if(this.isNew){
     this.meta.createAt = this.meta.updateAt = Date.now();
   }else {
     this.meta.updateAt = Date.now();
   }
+  // 将密码和盐混合型加密
+  /*第一个参数为计算强度，越大越复杂。
+   *第二个参数回调方法可以拿到生成后的盐salt。 
+    */
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if (err) return next(err)
-
+    // hash算法 
     bcrypt.hash(user.password, salt, function(err, hash) {
       if (err) return next(err)
 
