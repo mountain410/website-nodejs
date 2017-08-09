@@ -8,8 +8,7 @@ var Movie = require('./models/movie');
 var User = require('./models/user'); 
 //中间件用来解析http请求体,将body中的数据初始化成一个对象，如下文，可以直接用req.body 取出数据
 var bodyParser = require('body-parser'); 
-var cookieParser = require('cookie-parser')
-var session = require('express-session')
+var session = require('express-session');
 var app = express(); //将实例赋给变量app。express()表示创建express应用程序
 var port = process.env.PORT || 3000; //设置端口号 process是全局变量
 
@@ -19,12 +18,7 @@ app.locals.moment = require('moment');
 
 app.set('views', './views/pages');//设置视图的根目录
 app.set('view engine', 'pug');  //设置默认的模版引擎
-app.use(cookieParser())
-app.use(session({
-  secret: 'imooc',
-  resave: false,
-  saveUninitialized: true
-}))
+app.use(session({secret: 'imooc'}));
 app.use(bodyParser.urlencoded({extended:true})); //对urlencoeded的post参数进行解析
 app.use(express.static(path.join(__dirname,'public')));//静态资源的加载，在public目录里
 
