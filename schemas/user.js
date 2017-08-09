@@ -59,7 +59,9 @@ UserSchema.pre('save',function(next){
   })
 })
 
+// 实例方法。这是生成实例可以调用的
 UserSchema.methods = {
+  // _password 是用户传入的密码，this.password 是数据库的密码
   comparePassword: function(_password, cb) {
     bcrypt.compare(_password, this.password, function(err, isMatch) {
       if (err) return cb(err)
@@ -69,6 +71,7 @@ UserSchema.methods = {
   }
 }
 
+// 模型方法。这是模型里面直接可以调用
 UserSchema.statics = {
   // 用来取出现在数据库所有的数据
   fetch:function(cb){
