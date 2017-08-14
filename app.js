@@ -21,13 +21,17 @@ app.locals.moment = require('moment');
 app.set('views', './views/pages');//设置视图的根目录
 app.set('view engine', 'pug');  //设置默认的模版引擎
 app.use(session({
-  secret: 'imooc',
+  secret: 'website',
   // 保持用户信息持久化，重启服务不丢失。这里用的是mongodb方法。也可以用cookie-session方法
   store: new mongoStore({
     url: dburl,
     collection: 'sessions'
   })
 }));
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+})
 app.use(bodyParser.urlencoded({extended:true})); //对urlencoeded的post参数进行解析
 app.use(express.static(path.join(__dirname,'public')));//静态资源的加载，在public目录里
 
@@ -106,6 +110,12 @@ app.post('/user/signin', function(req, res) {
       }
     })
   })
+})
+
+// logout page
+app.get('/logout', function(req, res) {
+  delete req.session.user;
+  res.redirect('/')
 })
 
 //userlist page
