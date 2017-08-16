@@ -11,13 +11,15 @@ module.exports = function(app) {
   app.post('/user/signup', User.signup)
   app.post('/user/signin', User.signin)
   app.get('/logout', User.logout)
-  app.get('/admin/userlist', User.userlist)
+  app.get('/signup', User.showSignup)
+  app.get('/signin', User.showSignin)
+  app.get('/admin/user/list', User.signinRequired, User.adminRequired, User.userlist)
 
   // Movie
-  app.get('/admin/movie',Movie.new)
   app.get('/movie/:id',Movie.detail)
-  app.get('/admin/update/:id',Movie.update)
-  app.post('/admin/movie/new', Movie.save)
-  app.get('/admin/list', Movie.list)
-  app.delete('/admin/list', Movie.del)
+  app.get('/admin/movie', User.signinRequired, User.adminRequired, Movie.new)
+  app.get('/admin/movie/update/:id', User.signinRequired, User.adminRequired, Movie.update)
+  app.post('/admin/movie/new',  User.signinRequired, User.adminRequired, Movie.save)
+  app.get('/admin/movie/list',  User.signinRequired, User.adminRequired, Movie.list)
+  app.delete('/admin/movie/list',  User.signinRequired, User.adminRequired, Movie.del)
 }

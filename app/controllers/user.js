@@ -1,19 +1,32 @@
 var User = require('../models/user'); 
 
-// signup page
+// showSignup 
+exports.showSignup = function(req,res){
+    res.render('signup',{
+      title:'用户注册'
+    })
+}
+// showSignin 
+exports.showSignin = function(req,res){
+    res.render('signin',{
+      title:'用户登录'
+    })
+}
+
+/* 获取参数数据几种方式：
+ * req.params.userid 这是取得url中/:userid
+ * req.query.userid 这是取得url中问号后面的 /user?userid=1 
+ * req.param('userid') 已被弃用
+ */
+// signup post
 exports.signup = function(req,res) {
   var _user = req.body.user;//这是取得name=user[pwd]
-  /* 获取参数数据几种方式：
-   * req.params.userid 这是取得url中/:userid
-   * req.query.userid 这是取得url中问号后面的 /user?userid=1 
-   * req.param('userid') 已被弃用
-   */
   User.findOne({name: _user.name}, function(err,user){
     if (err) {
       console.log(err);
     }
     if(user) {
-      return res.redirect('/');
+      return res.redirect('/signin');
       // console.log('用户名已存在！')
     }else {
       var user = new User(_user);
@@ -21,13 +34,13 @@ exports.signup = function(req,res) {
         if(err) {
           console.log(err);
         }
-        res.redirect('/admin/userlist');
+        res.redirect('/');
       })
     }
   })
 }
 
-// signin page
+// signin post
 exports.signin = function(req, res) {
   var _user = req.body.user;
   var name = _user.name;
@@ -40,7 +53,7 @@ exports.signin = function(req, res) {
     }
     // 如果用户不存在，直接返回首页
     if (!user) {
-      return res.redirect('/');
+      return res.redirect('/signup');
     }
     // 如果用户存在，拿到用户密码（解密后）
     user.comparePassword(password, function(err, isMatch){
@@ -51,7 +64,9 @@ exports.signin = function(req, res) {
         req.session.user = user
         return res.redirect('/')
       }else {
+        return res.redirect('/signin');
         console.log('password is not matched');
+        alert('密码不对')
         // return res.redirect('/')
         
       }
@@ -76,4 +91,24 @@ exports.userlist = function(req,res){
       users:users
     })
   })
+}
+
+// midware user
+exports.signinRequired = function(req,res, next){
+  var user = req.session.user;
+  
+  if(!user){
+    return res.redirect('/signin')
+  }
+  next();
+}
+
+exports.adminRequired = function(req,res, next){
+  var user = req.session.user;
+  
+  if(!user.role || user.role <= 10){
+    console.log('对不起，您没有该访问权限！');
+    return res.redirect('/signin')
+  }
+  next();
 }

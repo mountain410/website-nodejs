@@ -1,0 +1,16 @@
+extends ../layout
+
+block content 
+	.container
+		.col-md-5
+			.row
+				form#signinForm(method="POST" action="/user/signin")
+					.form-group.clearfix
+						label(for="signinName") 用户名
+						input#signinName.form-control(name="user[name]" type="text" placeholder="账号")
+					.form-group.clearfix
+						label(for="signinPassword") 密码
+						input#signinPassword.form-control(name="user[password]" type="password" placeholder="密码")
+					.modal-footer
+						button.btn.btn-default(type="button" data-dismiss="modal") 关闭
+						button.btn.btn-success(type="submit") 登录
