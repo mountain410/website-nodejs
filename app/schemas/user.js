@@ -46,7 +46,7 @@ UserSchema.pre('save',function(next){
   // 将密码和盐混合型加密
   /*第一个参数为计算强度，越大越复杂。
    *第二个参数回调方法可以拿到生成后的盐salt。 
-    */
+   */
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if (err) return next(err)
     // hash算法 
@@ -76,15 +76,10 @@ UserSchema.statics = {
   // 用来取出现在数据库所有的数据
   fetch:function(cb){
     return this
-    .find({})   //数据库批量查询，只需要调用模型的 find({}) 方法就行
-    .sort('meta.updateAt') //按照更新时间排序
-    .exec(cb) //执行回调方法
+    .find({})                         //数据库批量查询，只需要调用模型的 find({}) 方法就行
+    .sort('meta.updateAt')            //按照更新时间排序
+    .exec(cb)                         //执行回调方法
   },
-  findById:function(id,cb){
-    return this
-    .findOne({_id:id}) //数据库单条查询就是 find({数据唯一的key}) 
-    .exec(cb) //执行回调方法
-  }
 }
 module.exports = UserSchema;
 

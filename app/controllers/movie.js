@@ -1,8 +1,8 @@
 var _ = require('underscore');
 var Movie = require('../models/movie');
 
-// admin new page
-exports.new = function(req,res){
+// admin add page
+exports.add = function(req,res){
   // 当匹配到路由为'/admin/movie'时，返回渲染录入页'admin'，并向其传数据
   res.render('admin',{
     title:'电影 后台录入页',
@@ -52,7 +52,7 @@ exports.update = function(req,res){
  *就可以把数据传到数据库中
  */
 
-// admin post movie
+// admin/movie/new post 
 exports.save = function(req,res){
   var id = req.body.movie._id;
   var movieObj = req.body.movie;

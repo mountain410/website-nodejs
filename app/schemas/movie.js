@@ -34,7 +34,7 @@ MovieSchema.pre('save',function(next){
   }else {
     this.meta.updateAt = Date.now();
   }
-  next(); //让流程继续走下去
+  next(); //让流程继续走下去，跳出去执行下面语句
 })
 MovieSchema.statics = {
   // 用来取出现在数据库所有的数据
