@@ -1,6 +1,6 @@
 // 入口文件app.js
 var express = require('express');                       // 加载express模块
-var app = express();                //将实例赋给变量app。express()表示创建express应用程序
+var app = express();                                    // 将实例赋给变量app。express()表示创建express应用程序
 
 var path = require('path');                             // 引入路径核心模块
 var mongoose = require('mongoose');                     // 引入mongoose模块         
@@ -10,11 +10,11 @@ var morgan = require('morgan');                         // HTTP请求记录中�
 
 //中间件用来解析http请求体,将body中的数据初始化成一个对象，如下文，可以直接用req.body 取出数据
 var bodyParser = require('body-parser');                // 将表单post提交(req)的body初始化成对象
-var port = process.env.PORT || 3000;                    //设置端口号 process是全局变量
+var port = process.env.PORT || 3000;                    // 设置端口号 process是全局变量
 var dburl = 'mongodb://localhost/website-nodejs';
 
-mongoose.connect(dburl);                                 // 连接本地数据库
-app.locals.moment = require('moment');    // 引入moment模块并设置为app.locals属性,用来格式化时间
+mongoose.connect(dburl);                                // 连接本地数据库
+app.locals.moment = require('moment');                  // 引入moment模块并设置为app.locals属性,用来格式化时间
 
 app.set('views', './app/views/pages');                  // 设置视图的根目录
 app.set('view engine', 'pug');                          // 设置默认的模版引擎
@@ -39,7 +39,7 @@ if ('development' === env) {
   app.locals.pretty = true;                             // 源码格式化，不要压缩
   mongoose.set('debug',true);                           // 显示数据库查询信息
 }
-app.listen(port);                                       //监听端口
+app.listen(port);                                       // 监听端口
 
 require('./config/routes')(app)                         // 路由控制
 

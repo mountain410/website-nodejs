@@ -20,6 +20,7 @@ exports.showSignin = function(req,res){
  */
 // signup post
 exports.signup = function(req,res) {
+  // 没有判断 body.user 假设是正确的我们需要的
   var _user = req.body.user;            //这是取得name=user[pwd]
   User.findOne({name: _user.name}, function(err,user){
     if (err) {
