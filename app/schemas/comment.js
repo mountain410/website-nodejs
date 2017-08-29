@@ -7,7 +7,11 @@ var ObjectId = Schema.Types.ObjectId;           // 注意这里每个单词都�
 var CommentSchema  = new Schema({
   movie: {type:ObjectId, ref:'Movie'},
   from:  {type:ObjectId, ref:'User'},
-  to: {type:ObjectId, ref:'User'},
+  reply: [{
+    from: {type:ObjectId, ref:'User'},
+    to: {type:ObjectId, ref:'User'},
+    content: String
+  }],
   content: String,
   // 录入数据、更新数据的时间
   meta:{
