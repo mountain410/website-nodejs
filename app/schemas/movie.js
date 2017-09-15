@@ -1,8 +1,9 @@
 //mongoose 编译模式 定义数据字段的类型
 var mongoose = require('mongoose');
-
+var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;  
 // 定义数据字段的类型
-var MovieSchema  = new mongoose.Schema({
+var MovieSchema  = new Schema({
   doctor:String,
   title:String,
   language:String,
@@ -11,6 +12,10 @@ var MovieSchema  = new mongoose.Schema({
   flash:String,
   poster:String,
   year:Number,
+  category: {
+    type: ObjectId,
+    ref: 'Category'
+  },
   // 录入数据、更新数据的时间
   meta:{
     //录入数据时间

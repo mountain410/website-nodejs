@@ -8,7 +8,7 @@ var session = require('express-session');               // session依赖cookie�
 var mongoStore = require('connect-mongo')(session);     // 对session进行持久化
 var morgan = require('morgan');                         // HTTP请求记录中间件
 
-//中间件用来解析http请求体,将body中的数据初始化成一个对象，如下文，可以直接用req.body 取出数据
+//中间件用来解析http请求体,将body中的数据初始化成一个对象，可以直接用req.body 取出数据
 var bodyParser = require('body-parser');                // 将表单post提交(req)的body初始化成对象
 var port = process.env.PORT || 3000;                    // 设置端口号 process是全局变量
 var dburl = 'mongodb://localhost/website-nodejs';

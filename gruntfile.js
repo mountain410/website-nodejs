@@ -20,8 +20,8 @@ module.exports = function(grunt){
 
     nodemon: {
       dev: {
+        script:'app.js',
         options: {
-          file: 'app.js',
           args: [],
           ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
           watchedExtensions: ['js'],

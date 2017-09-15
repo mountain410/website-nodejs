@@ -8,6 +8,10 @@ block content
 				//- 隐藏的表单域，存储电影的id，用来更新电影数据，
 				input(type="hidden",name="movie[_id]",value=movie._id) 
 				.form-group
+					label.col-sm-2.control-label(for="inputCategory") 电影分类
+					.col-sm-10
+						input#inputCategory.form-control(type="text",name="movie[category]", value=movie.category)
+				.form-group
 					label.col-sm-2.control-label(for="inputTitle") 电影名字
 					.col-sm-10
 						input#inputTitle.form-control(type="text",name="movie[title]", value=movie.title)
